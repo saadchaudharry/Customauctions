@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+  {% block body %}
+
+<div id='home' class="jumbotron bg-white text-center rounded-0 m-0">
+  <br>
+  <strong class="h1 text-justify py-3  font-weight-norma">The perfect tech for you.</strong>
+  <br>
+  <strong class="text-muted text-justify py-3">Choose from our wide variety of range</strong>
+</div>
+
+
+  <div class="row m-0">
+  {% for i in prod %}
+<div class="col-12 col-md-6 col-lg-4 card border-0 " style="width: 18rem;">
+  <img src="/media/{{ i.image }}" class="card-img-top m-0 p-0" alt="...">
+  <div class="card-body text-center mt-0 pt-0">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+      {% endfor %}
+      <hr>
+
+
+  </div>
+
+
+
+
+  {% endblock%}
