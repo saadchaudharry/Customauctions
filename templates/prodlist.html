@@ -5,27 +5,31 @@
 
 <div id='home' class="jumbotron bg-white text-center rounded-0 m-0">
   <br>
-  <strong class="h1 text-justify py-3  font-weight-norma">The perfect tech for you.</strong>
+  <strong class="h1 text-justify py-3  font-weight-normal">The perfect tech for you.</strong>
   <br>
-  <strong class="text-muted text-justify py-3">Choose from our wide variety of range</strong>
+  <strong class="text-muted font-weight-normal text-justify py-3">Choose from our wide variety of range</strong>
 </div>
 
 
   <div class="row m-0">
   {% for i in prod %}
-<div class="col-12 col-md-6 col-lg-4 card border-0 " style="width: 18rem;">
-  <img src="/media/{{ i.image }}" class="card-img-top m-0 p-0" alt="...">
-  <div class="card-body text-center mt-0 pt-0">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+<div class="card text-center col-12 col-md-6 col-lg-3 card border-0 " style="width: 18rem;">
+    <div CLASS="text-center m-0 p-0">
+     <img src="/media/{{ i.image }}" class="img-fluid card-img-top m-0 p-0" style="max-height: 250px;max-width: 250px" alt="...">
+    </div>
+  <div class="card-body">
+    <h3 class="card-title font-weight-normal">{{ i.title }}</h3>
+    <p class="card-text "><del class="text-muted m-1"><span>₹</span>{{ i.real_price }}</del>  <span>₹</span>{{ i.dicount_price }} </p>
+    <a href="/d/{{ i.slug }}" class="btn btn-primary">View more	&#8594</a>
   </div>
 </div>
+
+
       {% endfor %}
-      <hr>
-
-
   </div>
 
 
 
 
-  {% endblock%}
+  {% endblock %}

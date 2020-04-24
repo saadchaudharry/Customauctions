@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="alert alert-dark text-center p-0" role="alert">
+    <small >Delivery charges may apply</small>
+</div>
+
+
+<div class="jumbotron bg-white">
+
+    <div class="row container " >
+      <div class="col-12 col-md-6 text-center order-1">
+        <img src="/media/{{ object.image }}" style="max-width: 250px;max-height: 250px">
+      </div>
+      <div class=" col-12 col-md-6 order-2">
+          <h1 class="font-weight-normal">{{ object.title }}</h1>
+          <p class="lead font-weight-bold"><span>₹</span>{{ object.real_price }}</p>
+          <p class="lead">{{ object.description }}</p>
+        <div class="form-group col-md-4">
+          <label for="inputState">Quantity</label>
+          <select id="inputState" class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+          <hr class="my-2">
+          <a class="btn btn-primary btn-lg" href="" role="button">Learn more</a>
+      </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+{% endblock%}

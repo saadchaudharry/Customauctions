@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from django.views.generic import ListView
+from django.views.generic import ListView,DetailView
 from .models import Category,Products
 
 # Create your views here.
@@ -8,6 +8,11 @@ from .models import Category,Products
 class Category_list(ListView):
     model = Category
     template_name ='catagory_list.html'
+
+
+class product_detail(DetailView):
+    model = Products
+    template_name = 'product_detail.html'
 
 
 def product_list(request,category_slug):
