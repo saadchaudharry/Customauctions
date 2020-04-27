@@ -1,0 +1,28 @@
+<html>
+
+<head>
+  <title>Checkout</title>
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+
+
+<form method="post" action="">
+<input id="card-name" type="text">
+<!-- placeholder for Elements -->
+<div id="card-element"></div>
+<button id="card-button" data-secret="{{ client_secret }}">
+  Submit Payment
+</button>
+</form>
+
+
+
+
+<script>
+
+var stripe = Stripe('pk_test_YzKPxdSZIFf7cPoKXWjHyANY00Af8tmViO');
+var elements = stripe.elements();
+
+</script>
+
+</html>

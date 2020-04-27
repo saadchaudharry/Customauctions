@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+    <div class="alert alert-dark" role="alert">
+  Kind save your order id and take a screenshot we are not responsible any lost.
+</div>
+<script>console.log({{ order.total }})</script>
+<div class="mx-1">
+    <table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Order ID </th>
+      <th scope="">{{ order }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>Name</b></td>
+      <td class="font-weight-normal">{{ order.Name }}</td>
+    </tr>
+
+    <tr>
+      <td><b>Contact</b></td>
+      <td>{{ order.Contact }}</td>
+    </tr>
+
+    <tr>
+      <td><b>Email</b></td>
+      <td>{{ order.Email }}</td>
+    </tr>
+
+
+    <tr>
+      <td><b>Product</b></td>
+      <td><b>{{ order.product }}</b></td>
+    </tr>
+
+    <tr>
+      <td><b>Price</b></td>
+      <td><b><span>₹</span>{{ order.total }}</b></td>
+    </tr>
+
+    <tr>
+      <td><b>Address</b></td>
+      <td>{{ order.Address1 }}{{ order.Address2 }}</td>
+    </tr>
+
+    <tr>
+      <td><b>City</b></td>
+      <td>{{ order.City }}</td>
+    </tr>
+
+    <tr>
+      <td><b>State</b></td>
+      <td>{{ order.State }}</td>
+    </tr>
+
+    <tr>
+      <td><b>PinCode</b></td>
+      <td>{{ order.Pincode }}</td>
+    </tr>
+
+
+  </tbody>
+</table>
+
+
+{#<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"#}
+{#    data-key="{{ key }}"#}
+{#    data-description="{{ order.order_id }}"#}
+{#    data-amount="{{ order.total }}"#}
+{#    data-currency='inr'#}
+{#    data-locale="auto">#}
+{#</script>#}
+
+<form action="{% url 'charge' %}" method="post">
+  {% csrf_token %}
+    <input type="hidden" name="order" value="{{ order.total }}">
+    <input type="hidden" name="ids" value="{{ order.order_id}}">
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="{{ key }}"
+          data-description="{{ order.order_id }}"
+          data-amount="{{ order.total }}"
+          data-currency='inr'
+          data-locale="auto">
+
+
+  </script>
+</form>
+
+
+
+    </div>
+
+    <script>sessionStorage.setItem("order_id", "{{ order }}");</script>
+
+{% endblock %}
