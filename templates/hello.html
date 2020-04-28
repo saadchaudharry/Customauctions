@@ -77,7 +77,12 @@
 <form action="{% url 'charge' %}" method="post">
   {% csrf_token %}
     <input type="hidden" name="order" value="{{ order.total }}">
-    <input type="hidden" name="ids" value="{{ order.order_id}}">
+    <input type="hidden" name="ids" value="{{ order.order_id }}">
+    <input type="hidden" name="name" value="{{ order.Name }}">
+    <input type="hidden" name="line1" value="{{ order.Address1 }}{{ order.Address2 }}">
+    <input type="hidden" name="city" value="{{ order.City }}">
+    <input type="hidden" name="state" value="{{ order.State }}">
+    <input type="hidden" name="pincode" value="{{ order.Pincode }}">
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="{{ key }}"
           data-description="{{ order.order_id }}"

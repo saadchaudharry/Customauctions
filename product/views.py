@@ -47,12 +47,27 @@ def charge(request): # new
     if request.method == 'POST':
         amount=request.POST.get('order')
         orderid=request.POST.get('ids')
+        name =request.POST.get('name')
+        address=request.POST.get('line1')
+        city =request.POST.get('city')
+        state =request.POST.get('state')
+        Pincode =request.POST.get('pincode')
         b=int(amount)*100
         print(type(b))
         charge = stripe.Charge.create(
             amount=b,
             currency="inr",
             description=str(orderid),
+            shipping={
+                'name':str(name),
+                'address': {
+                    'line1': str(address),
+                    'postal_code': str(Pincode),
+                    'city': str(city),
+                    'state': str(state),
+                    'country': 'INDIA',
+                }
+            },
             source=request.POST['stripeToken']
         )
         return render(request, 'charge.html')

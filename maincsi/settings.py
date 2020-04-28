@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'product',
-    'order'
+    'order',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -71,6 +72,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'maincsi.wsgi.application'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -120,7 +122,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 
-
+STRIPE_SECRET_KEY = 'sk_test_opgUQ5bUIXuqxu1vYD3zOO2Q008cYv1db9'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_YzKPxdSZIFf7cPoKXWjHyANY00Af8tmViO'
 
 
 STATIC_URL = '/static/'

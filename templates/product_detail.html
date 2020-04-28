@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block body %}
 
@@ -7,23 +8,25 @@
 </div>
 
 
-<div class="jumbotron bg-white">
+<div class="jumbotron bg-white m-0 ">
 
-    <div class="row container " >
+    <div class="row container m-0 p-0" >
+
       <div class="col-12 col-md-6 text-center order-1">
         <img src="/media/{{ object.image }}" style="max-width: 250px;max-height: 250px">
       </div>
-      <div class=" col-12 col-md-6 order-2">
+      <div class=" col-12 col-md-6 order-2 m-0 p-0">
           <h1 class="font-weight-normal">{{ object.title }}</h1>
           <p class="lead font-weight-bold"><span>₹</span>{{ object.real_price }}</p>
-            <!-- Button trigger modal -->
+           <button type="button" class="btn btn-primary m-0" data-toggle="modal" data-target="#exampleModal">
+              Buy
+            </button>
+   <hr class="my-4">
+          <div style="overflow-wrap: break-word;">
+              <p>{{ object.description|wordwrap:10 }}</p>
+        </div>
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                  Buy
-                </button>
-          <hr class="my-2">
 
-          <p class="lead">{{ object.description }}</p>
       </div>
     </div>
 </div>
@@ -47,17 +50,17 @@
         <form action="{% url 'indfdfex' %}" method="post">{% csrf_token %}
 
             <input type="hidden" name="id_product" value="{{ object }}">
-           name {{ form.Name }}<br>
-           Email {{ form.Email }}<br>
+            {{ form.Name|as_crispy_field }}<br>
+            {{ form.Email|as_crispy_field }}<br>
             <select name="product" required="" id="id_product" hidden>
              <option value="{{ object.id }}" selected="">{{ object }}</option>
             </select>
-            Contact{{ form.Contact }}<br>
-            Address1{{ form.Address1 }}<br>
-            Address2{{ form.Address2 }}<br>
-            City{{ form.City }}<br>
-            State{{ form.State }}<br>
-            Pincode{{ form.Pincode }}<br>
+            {{ form.Contact|as_crispy_field }}<br>
+            {{ form.Address1|as_crispy_field }}<br>
+            {{ form.Address2|as_crispy_field }}<br>
+            {{ form.City|as_crispy_field }}<br>
+            {{ form.State|as_crispy_field }}<br>
+            {{ form.Pincode|as_crispy_field }}<br>
 
             <input type="submit" class="btn btn-primary">
 
