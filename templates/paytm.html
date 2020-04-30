@@ -1,0 +1,15 @@
+<html>
+<head>
+<title>Merchant Checkout Page</title>
+</head>
+<body>
+<h1>Please do not refresh this page...</h1>
+<form action="https://securegw.paytm.in/order/process" method="post" name="paytm">
+    {% for key, value in param_dict.items %}
+    <input type="hidden" name="{{key}}" value="{{value}}">
+    {% endfor %}
+<script type="text/javascript">
+document.paytm.submit();
+</script>
+</body>
+</html>

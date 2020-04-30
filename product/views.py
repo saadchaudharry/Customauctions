@@ -3,10 +3,16 @@ from django.views.generic import ListView,DetailView
 from .models import Category,Products
 from order.forms import order_all_form
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
-import stripe
+from paytm import Checksum
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
+MERCHANT_KEY="srGpEUSjD2gj9SmY"
+
+
+# import stripe
+#
+# stripe.api_key = settings.STRIPE_SECRET_KEY
 # Create your views here.
 
 
@@ -24,54 +30,6 @@ class product_detail(DetailView):
         context['form'] = order_all_form
         return context
 
-
-def formjsjs(request):
-    order_form =order_all_form(request.POST)
-    key       =settings.STRIPE_PUBLISHABLE_KEY
-    if order_form.is_valid():
-        instance =order_form.save(commit=True)
-        instance.save()
-
-    context={'form':order_form,'order':instance,'key':key}
-
-    return render(request,'hello.html',context)
-
-#
-# @app.route('/checkout')
-# def checkout(request):
-#   intent = # ... Fetch or create the PaymentIntent
-#   return render(request,'checkout.html', {'client_secret'=intent.client_secret})
-
-
-def charge(request): # new
-    if request.method == 'POST':
-        amount=request.POST.get('order')
-        orderid=request.POST.get('ids')
-        name =request.POST.get('name')
-        address=request.POST.get('line1')
-        city =request.POST.get('city')
-        state =request.POST.get('state')
-        Pincode =request.POST.get('pincode')
-        b=int(amount)*100
-        print(type(b))
-        charge = stripe.Charge.create(
-            amount=b,
-            currency="inr",
-            description=str(orderid),
-            shipping={
-                'name':str(name),
-                'address': {
-                    'line1': str(address),
-                    'postal_code': str(Pincode),
-                    'city': str(city),
-                    'state': str(state),
-                    'country': 'INDIA',
-                }
-            },
-            source=request.POST['stripeToken']
-        )
-        return render(request, 'charge.html')
-
 def product_list(request,category_slug):
     prod =Products.objects.filter(publish=True)
     if category_slug:
@@ -80,3 +38,55 @@ def product_list(request,category_slug):
     context={'prod':prod}
     return render(request, 'prodlist.html', context)
 
+def formjsjs(request):
+    order_form =order_all_form(request.POST)
+    if order_form.is_valid():
+        instance =order_form.save(commit=True)
+        instance.save()
+
+    context={'order':instance,}
+
+    return render(request,'hello.html',context)
+
+def paytm(request):
+    obj1 = request.POST.get('id')
+    obj2 = request.POST.get('total')
+    obj3 = request.POST.get('email')
+    print(obj1,obj2,obj3)
+
+    param_dict = {
+        'MID': 'OpgwLU07136444384795',
+        'ORDER_ID': str(obj1),
+        'TXN_AMOUNT':str(obj2),
+        'CUST_ID': str(obj3),
+        'INDUSTRY_TYPE_ID':'Retail',
+        'PAYMENT_MODE_ONLY':'yes',
+        'PAYMENT_TYPE_ID':['DC','CC'],
+        'AUTH_MODE':'3D',
+        'WEBSITE': 'DEFAULT',
+        'CHANNEL_ID': 'WEB',
+        'CALLBACK_URL': 'http://127.0.0.1:8000/handlerequest/',
+
+    }
+    param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, MERCHANT_KEY)
+    return render(request, 'paytm.html', {'param_dict': param_dict})
+
+
+
+@csrf_exempt
+def handlerequest(request):
+    form = request.POST
+    checksum = None
+    response_dict = {}
+    for i in form.keys():
+        response_dict[i] = form[i]
+        if i == 'CHECKSUMHASH':
+            checksum = form[i]
+    if checksum is not None:
+        verify = Checksum.verify_checksum(response_dict, MERCHANT_KEY, checksum)
+        if verify:
+            if response_dict['RESPCODE'] == '01':
+                print('order successful')
+        else:
+            print('order was not successful because' + response_dict['RESPMSG'])
+    return render(request, 'paymentstatus.html', {'response': response_dict})

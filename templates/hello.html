@@ -66,34 +66,13 @@
 </table>
 
 
-{#<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"#}
-{#    data-key="{{ key }}"#}
-{#    data-description="{{ order.order_id }}"#}
-{#    data-amount="{{ order.total }}"#}
-{#    data-currency='inr'#}
-{#    data-locale="auto">#}
-{#</script>#}
-
-<form action="{% url 'charge' %}" method="post">
-  {% csrf_token %}
-    <input type="hidden" name="order" value="{{ order.total }}">
-    <input type="hidden" name="ids" value="{{ order.order_id }}">
-    <input type="hidden" name="name" value="{{ order.Name }}">
-    <input type="hidden" name="line1" value="{{ order.Address1 }}{{ order.Address2 }}">
-    <input type="hidden" name="city" value="{{ order.City }}">
-    <input type="hidden" name="state" value="{{ order.State }}">
-    <input type="hidden" name="pincode" value="{{ order.Pincode }}">
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="{{ key }}"
-          data-description="{{ order.order_id }}"
-          data-amount="{{ order.total }}"
-          data-currency='inr'
-          data-locale="auto">
-
-
-  </script>
+<form method="post" action="{% url 'paytm' %}">
+    {% csrf_token %}
+    <input type="hidden" name="id" value="{{ order.order_id }}">
+    <input type="hidden" name="total" value="{{ order.total }}">
+    <input type="hidden" name="email" value="{{ order.Email }}">
+   <input type='submit' class='btn btn-warning'>
 </form>
-
 
 
     </div>
