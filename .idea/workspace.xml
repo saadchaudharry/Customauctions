@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2bb4316-b12a-48c8-b5bd-555a0c262035" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/paymentstatus.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/paytm.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maincsi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/maincsi/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/order/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/product/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/hello.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/hello.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/paytm.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/paytm.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,7 +50,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../online/tweetme/Ecomm/Templates/payment/paym.html" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../online/tweetme/Ecomm/orders/models.py" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
@@ -141,7 +139,13 @@
       <workItem from="1587838475555" duration="17470000" />
       <workItem from="1587987100678" duration="10903000" />
       <workItem from="1588065862018" duration="7525000" />
-      <workItem from="1588278679229" duration="3879000" />
+      <workItem from="1588278679229" duration="5338000" />
+      <workItem from="1588323250199" duration="4454000" />
+      <workItem from="1588329247148" duration="1861000" />
+      <workItem from="1588924491550" duration="80000" />
+      <workItem from="1590026984058" duration="54000" />
+      <workItem from="1590489424824" duration="2886000" />
+      <workItem from="1590631357498" duration="3496000" />
     </task>
     <servers />
   </component>

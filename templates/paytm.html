@@ -4,7 +4,9 @@
 </head>
 <body>
 <h1>Please do not refresh this page...</h1>
-<form action="https://securegw.paytm.in/order/process" method="post" name="paytm">
+<form action="https://securegw-stage.paytm.in/theia/processTransaction" method="post" name="paytm">
+{#<form action="https://securegw-stage.paytm.in/order/process" method="post" name="paytm">#}
+{#<form action="https://securegw.paytm.in/order/process" method="post" name="paytm">#}
     {% for key, value in param_dict.items %}
     <input type="hidden" name="{{key}}" value="{{value}}">
     {% endfor %}
