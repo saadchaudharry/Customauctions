@@ -41,3 +41,14 @@ def prodsignal(sender,instance,*args,**kwargs):
         instance.slug=unique_slug_generator(instance)
 
 pre_save.connect(prodsignal,sender=Products)
+
+
+
+class contactus(models.Model):
+    name =models.CharField(max_length=233)
+    gmail=models.EmailField(max_length=233)
+    contact=models.IntegerField()
+    message=models.TextField(max_length=1000)
+
+    def __str__(self):
+        return str(self.name)

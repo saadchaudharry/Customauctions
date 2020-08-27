@@ -17,12 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from product.views import Category_list,product_list,product_detail,formjsjs,paytm,handlerequest
+from product.views import (Category_list,product_list,product_detail,formjsjs,paytm,handlerequest,contactuss)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Category_list.as_view(),name="index"),
     path('1', formjsjs,name="indfdfex"),
+    path('contactus/', contactuss.as_view(),name="contactsss"),
     path('paytm',paytm,name="paytm"),
     path("handlerequest/", handlerequest, name="handlerequest"),
     path('p/<category_slug>', product_list,name="prod"),

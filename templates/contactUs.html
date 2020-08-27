@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block body  %}
+<div class="jumbotron bg-white container animated bounceInDown">
+  <h1 class="">Contact us</h1>
+  <small class="text-justify text-success">For any kind of Enquriry</small>
+  <hr class="my-4">
+
+    <div class="row">
+
+<div class="col-12 ">
+<form method="post" class="fgrn">{% csrf_token %}
+    {{ form|crispy }}
+  <button type="submit" class="btn btn-success">Submit</button>
+</form>
+</div>
+{##}
+{#<div class="col-12 col-md-6">#}
+{##}
+{#</div>#}
+
+</div>
+
+</div>
+{% endblock %}

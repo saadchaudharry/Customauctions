@@ -1,24 +1,31 @@
 from django.shortcuts import render,get_object_or_404
-from django.views.generic import ListView,DetailView
-from .models import Category,Products
-from order.models import Order_all
+from django.urls import reverse_lazy
+from django.views.generic import ListView,DetailView,CreateView
+from .models import Category,Products,contactus
+from .forms import contact_form
 from order.forms import order_all_form
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
-
 from paytm import Checksum
-MERCHANT_KEY="SG4UY9spY6dyf!l6"
-# MERCHANT_KEY="srGpEUSjD2gj9SmY"
-# MERCHANT_KEY="eM7V7F3lj%zGP&Tr"
+
 # MERCHANT_KEY="_BuGPdRFlxW%ZnF1"
-# MERCHANT_KEY="SG4UY9spY6dyf!l6"
-# MERCHANT_KEY="SG4UY9spY6dyf!l6"
+MERCHANT_KEY="SG4UY9spY6dyf!l6"
+
+# MERCHANT_KEY="eM7V7F3lj%zGP&Tr"
+
 
 # import stripe
 #
 # stripe.api_key = settings.STRIPE_SECRET_KEY
 # Create your views here.
 
+
+
+class contactuss(CreateView):
+    model = contactus
+    form_class = contact_form
+    template_name = 'contactUs.html'
+    success_url = reverse_lazy('contactsss')
 
 class Category_list(ListView):
     model = Category
@@ -57,30 +64,20 @@ def paytm(request):
     obj2 = request.POST.get('total')
     obj3 = request.POST.get('email')
     print(obj1,obj2,obj3)
-    # param_dict = {
-    #     # 'MID': 'OpgwLU07136444384795',
-    #     # 'MID': 'TXRpeE92458034081257',
-    #     # 'MID': 'IziPPU18604609740449',
-    #     # 'MID': 'ZdehqP52015247605360',
-    #     'MID': 'ZdehqP52015247605360',
-    #     'ORDER_ID': str(obj1),
-    #     'TXN_AMOUNT':str(obj2),
-    #     'CUST_ID': str(obj3),
-    #     'INDUSTRY_TYPE_ID': 'Retail',
-    #     'WEBSITE': 'WEBSTAGING',
-    #     'CHANNEL_ID': 'WEB',
-    #     'CALLBACK_URL': 'http://127.0.0.1:8000/handlerequest/',
-    #
-    # }
-    param_dict = {
 
+    param_dict = {
+        # 'MID': 'IziPPU18604609740449',
         'MID': 'ZdehqP52015247605360',
         'ORDER_ID': str(obj1),
-        'TXN_AMOUNT': str(obj2),
+        'TXN_AMOUNT':str(obj2),
         'CUST_ID': str(obj3),
-        'INDUSTRY_TYPE_ID': 'Retail',
-        'WEBSITE': 'WEBSTAGING',
+        'INDUSTRY_TYPE_ID':'Retail',
+        'PAYMENT_MODE_ONLY':'yes',
+        'PAYMENT_TYPE_ID':['DC','CC'],
+        'AUTH_MODE':'3D',
+        'WEBSITE': 'DEFAULT',
         'CHANNEL_ID': 'WEB',
+        # 'CALLBACK_URL': 'https://customauctions.in/handlerequest/',
         'CALLBACK_URL': 'http://127.0.0.1:8000/handlerequest/',
 
     }
@@ -103,15 +100,6 @@ def handlerequest(request):
         if verify:
             if response_dict['RESPCODE'] == '01':
                 print('order successful')
-                ds = Order_all.objects.get(order_id=response_dict['ORDERID'])
-                ds.status='success'
-                ds.save()
-                print(ds)
-            else:
-                ds = Order_all.objects.get(order_id=response_dict['ORDERID'])
-                ds.status = 'fail'
-                ds.delete()
-                print(ds)
         else:
             print('order was not successful because' + response_dict['RESPMSG'])
     return render(request, 'paymentstatus.html', {'response': response_dict})
