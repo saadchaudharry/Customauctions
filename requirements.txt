@@ -1,6 +1,6 @@
 certifi==2020.4.5.1
 chardet==3.0.4
-Django==2.2.7
+Django==2.2.22
 django-crispy-forms==1.9.0
 idna==2.9
 Pillow==7.1.1
